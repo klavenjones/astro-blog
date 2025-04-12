@@ -1,33 +1,67 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import '../styles/global.css';
+const pageTitle = 'About Klay';
+const identity = {
+  name: 'Klay',
+  description: 'A software engineer',
+  age: 25,
+  location: 'San Francisco',
+  interests: ['software development', 'reading', 'traveling'],
+  hobbies: ['reading', 'traveling', 'cooking']
+};
 
+const skills = ['software development', 'reading', 'traveling'];
+
+const happy = true;
+const finished = false;
+const goal = 3;
+
+const skillColor = 'green';
+const skillFontWeight = 'bold';
+const skillFontSize = '1.5rem';
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>Astro</title>
-  </head>
-  <body>
-    <body>
-      <a href="/">Home</a>
-      <a href="/about/">About</a>
-      <a href="/blog/">Blog</a>
-      <h1>My Astro Site</h1>
-      <h1>About Me</h1>
-      <h2>... and my new Astro site!</h2>
+<style define:vars={{ skillColor, skillFontWeight, skillFontSize }}>
+  h1 {
+    color: purple;
+    font-size: 4rem;
+  }
+  .skill {
+    color: var(--skillColor);
+    font-weight: var(--skillFontWeight);
+    font-size: var(--skillFontSize);
+  }
+</style>
 
-      <p>
-        I am working through Astro's introductory tutorial. This is the second
-        page on my website, and it's the first one I built myself!
-      </p>
+<BaseLayout pageTitle={pageTitle}>
+  <h1>My Astro Site</h1>
+  <h2>My name is {identity.name} and this is my new Astro site!</h2>
 
-      <p>
-        This site will update as I complete more of the tutorial, so keep
-        checking back and see how my journey is going!
-      </p>
-    </body>
-  </body>
-</html>
+  <p>
+    I am working through Astro's introductory tutorial. This is the second page
+    on my website, and it's the first one I built myself!
+  </p>
+  <p>
+    I am {identity.age} years old and I live in {identity.location}.
+  </p>
+  <p>
+    My skills include {skills.map((skill) => <li class="skill">{skill}</li>)}
+  </p>
+  <p>
+    My hobbies include {identity.hobbies.map((hobby) => <li>{hobby}</li>)}
+  </p>
+  {happy ? <p>I am happy</p> : <p>I am not happyM</p>}
+  {
+    finished ? (
+      <p>I finished the tutorial</p>
+    ) : (
+      <p>I did not finish the tutorial</p>
+    )
+  }
+  {goal === 3 ? <p>I reached my goal</p> : <p>I did not reach my goal</p>}
+  <p>
+    This site will update as I complete more of the tutorial, so keep checking
+    back and see how my journey is going!
+  </p>
+</BaseLayout>
